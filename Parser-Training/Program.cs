@@ -81,13 +81,11 @@ namespace Parser_Training
 
         public static async void DownloadImages(List<string> links)
         {
-
-            for(int i = 0; i < links.Count; i++)
+            var path = "C:\\Users\\User\\Pictures";
+            foreach(var link in links)
             {
-                var link = "http:" + links[i];
-                string imageDirectory = Path.Combine(Environment.CurrentDirectory, $"Images_{link.Replace('.', '_')}");
-
-                await link.DownloadFileAsync(imageDirectory);
+                var filename = Path.GetFileName(link);
+                await Parser.DownloadImageAsync(path, filename, new Uri("https:"+link));
             }
         }
 
